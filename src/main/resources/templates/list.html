@@ -5,25 +5,26 @@
     <title>Title</title>
 </head>
 <body>
-<a href="/add">Add a Course</a><br/>
+<a href="/add">Add a Message</a><br/>
 
 <table>
     <tr>
-        <th>Title</th>
-        <th>Instructor</th>
-        <th>Credits</th>
-        <th>Actions</th>
+        <th>ID</th>
+        <th>Content</th>
+        <th>PostedDate</th>
+        <th>SentBy</th>
 
     </tr>
 
-    <tr th:each="course : ${courses}">
-    <td th:text="${course.title}"></td>
-    <td th:text="${course.instructor}"></td>
-    <td th:text="${course.credit}"></td>
+    <tr th:each="message : ${messages}">
+    <td th:text="${message.id}"></td>
+    <td th:text="${message.Content}"></td>
+    <td th:text="${message.postedDate}"></td>
+        <td th:text="${message.SentBy}"></td>
 
     <td>
 
-        <a th:href ="@{/detail/{id}(id=${course.id})}">Details</a>
+        <a th:href ="@{/detail/{id}(id=${message.id})}">Details</a>
 
 
     </td>

@@ -12,43 +12,45 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @Controller
-public class HomeController {
-
+public class MessageController {
     @Autowired
-    CourseRepository courseRepository;
+    MessageRepository messageRepository;
+
 
     @RequestMapping("/")
-    public String listcourses(Model model)
+    public String listMessages(Model model)
     {
-        model.addAttribute("courses",courseRepository.findAll());
+        model.addAttribute("messages",messageRepository.findAll());
         return "list";
 
     }
-    @GetMapping("/add")
-    public String courseForm(Model model)
-    {
-        model.addAttribute("course",new Course());
 
-        return "courseform";
+    @GetMapping("/add")
+    public String messageForm(Model model)
+    {
+        model.addAttribute("message",new Message());
+        return "messageform";
+
     }
 
     @PostMapping("/process")
-    public String processForm(@Valid Course course, BindingResult result)
+    public String processForm(@Valid Message message, BindingResult result)
     {
-        if(result.hasErrors())
-        {
-            return "courseform";
-        }
-        courseRepository.save(course);
-        return "redirect:/";
+          if(result.hasErrors())
+          {
+              return "messageform";
+          }
+        messageRepository.save(message);
+          return "redirect:/";
     }
 
     @RequestMapping("/detail/{id}")
-    public String showCourse(@PathVariable("id") long id, Model model)
+    public String  ShowMessage(@PathVariable("id") long id, Model model)
     {
-        model.addAttribute("course",courseRepository.findOne(id));
-        return "show";
-    }
+        model.addAttribute("message",messageRepository.findOne(id));
 
+        return "show";
+
+    }
 
 }
